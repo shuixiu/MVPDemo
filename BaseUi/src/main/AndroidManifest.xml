@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.content.baseui" >
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!--允许使用电源管理器的WakeLocks让处理器免于睡眠或屏幕变暗。防护等级：正常 added in API level 1-->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!--允许应用程序在不安全的情况下禁用键盘锁。防护等级：正常added in API level 1-->
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+
+</manifest>

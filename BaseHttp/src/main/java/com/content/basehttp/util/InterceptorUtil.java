@@ -37,11 +37,14 @@ public class InterceptorUtil {
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
                 Request.Builder builder1 = request.newBuilder();
-                Request build = null;
-                for (Map.Entry<String, String> entry : headMap.entrySet()) {
-                    build = builder1.addHeader(entry.getKey(), entry.getValue()).build();
-                }
-                return chain.proceed(build);
+                /*for (Map.Entry<String, String> entry : headMap.entrySet()) {
+                    builder1.addHeader(entry.getKey(), entry.getValue()).build();
+                }*/
+                builder1.addHeader("unionId", "f1269ac3f55911e9847d00163e054dc1");
+                builder1.addHeader("appToken", "t6p3tvV272CK4isF6ObqT6d2B2q7y0B4p4UNc6/UnfbwtiH57BQJWGfcxOlbCUC/sk4Tp2A3nXXx78kMtdPN7MAyVBoIDvkF");
+
+                request =  builder1.build();
+                return chain.proceed(request);
             }
         };
 

@@ -2,8 +2,10 @@ package com.content.baseui.application;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+
 
 import androidx.multidex.MultiDexApplication;
 
@@ -19,6 +21,11 @@ public class DevApplication extends MultiDexApplication {
     protected String TAG = DevApplication.class.getSimpleName();
 
     private NetworkStateInfc networkStateTool;// 网络检测工具
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+    }
 
     @Override
     public void onCreate() {

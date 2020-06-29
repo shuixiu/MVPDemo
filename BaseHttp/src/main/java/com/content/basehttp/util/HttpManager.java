@@ -3,7 +3,10 @@ package com.content.basehttp.util;
 import android.annotation.SuppressLint;
 
 
+import com.content.basehttp.BuildConfig;
+import com.content.basehttp.Constants;
 import com.content.basehttp.WRetrofitApp;
+import com.content.basehttp.impl.ApiService;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.security.SecureRandom;
@@ -31,9 +34,7 @@ public class HttpManager {
     private static HttpManager mInstance;
     private Retrofit retrofit;
     private Map<String, String> headMap;
-
-    private HttpManager() {
-    }
+    private ApiService api;
 
     public static HttpManager create() {
         if (mInstance == null) {
@@ -43,44 +44,27 @@ public class HttpManager {
         }
         return mInstance;
     }
-
-    public HttpManager build(String baseUrl) {
+    private HttpManager () {
         Retrofit.Builder builder = new Retrofit.Builder();
         retrofit = builder
                 .client(createOKHttpClient())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // 支持RxJava
-                .baseUrl(baseUrl)
+                .baseUrl(Constants.API_URL)
                 .build();
-        return this;
+    }
+    public Retrofit getRetrofit() {
+        return retrofit;
     }
 
-   /* public void cancleAll(){
-        createOKHttpClient().dispatcher().cancelAll();
-    }
 
-    public void cancleTag(String tag){
-        Log.d("wwn","bt_money_pay_cancle");
-        Dispatcher dispatcher = createOKHttpClient().dispatcher();
-        synchronized (dispatcher){
-            for (Call call : dispatcher.queuedCalls()) {
-                if (tag.equals(call.request().tag())) {
-                    call.cancel();
-                }
-            }
-            for (Call call : dispatcher.runningCalls()) {
-                if (tag.equals(call.request().tag())) {
-                    call.cancel();
-                }
-            }
-        }
-    }*/
 
     private OkHttpClient createOKHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        if (WRetrofitApp.isDebug())
-            builder.addInterceptor(InterceptorUtil.LogInterceptor());//添加拦截
-        if (headMap != null && headMap.size() > 0)
+//        if (headMap != null && headMap.size() > 0)
             builder.addInterceptor(InterceptorUtil.HeaderInterceptor(headMap));//添加请求头
+        if (BuildConfig.DEBUG)
+            builder.addInterceptor(InterceptorUtil.LogInterceptor());//添加拦截
+
         return builder
                 .readTimeout(WRetrofitApp.getReadTimeout(), TimeUnit.SECONDS)//设置读取超时时间
                 .writeTimeout(WRetrofitApp.getWriteTimeout(), TimeUnit.SECONDS)//设置写的超时时间
@@ -109,6 +93,12 @@ public class HttpManager {
             }
             return sb.toString();
         }
+    }
+    public synchronized ApiService getApi() {
+        if (api == null) {
+            api = retrofit.create(ApiService.class);
+        }
+        return api;
     }
 
 

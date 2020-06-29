@@ -1,16 +1,17 @@
 package com.content.basehttp;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 
 
-import com.content.basehttp.impl.ApiService;
-import com.content.basehttp.impl.OnRetrofit;
-import com.content.basehttp.observer.MyObserver;
-import com.content.basehttp.util.DownLoadUtil;
-import com.content.basehttp.util.HttpManager;
-import com.content.basehttp.util.UpLoadUtil;
-import com.content.basehttp.util.WDialogUtil;
+import com.test.sixpro.retrofit.impl.ApiService;
+import com.test.sixpro.retrofit.impl.OnRetrofit;
+import com.test.sixpro.retrofit.observer.MyObserver;
+import com.test.sixpro.retrofit.util.DownLoadUtil;
+import com.test.sixpro.retrofit.util.HttpManager;
+import com.test.sixpro.retrofit.util.UpLoadUtil;
+import com.test.sixpro.retrofit.util.WDialogUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.Map;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
+import retrofit2.Call;
 
 
 public class WRetrofit {

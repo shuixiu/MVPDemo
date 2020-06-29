@@ -1,6 +1,9 @@
 package com.content.basehttp.impl;
 
+import android.util.ArrayMap;
+
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +12,6 @@ public interface OnRetrofit {
 
     interface OnQueryMapListener<T> {
 
-        void onMap(Map<String, String> map);
 
         void onSuccess(T t);
 
